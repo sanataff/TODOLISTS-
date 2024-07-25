@@ -100,11 +100,55 @@
       /* left: 30%; */
       position: absolute;
       border-radius: .25rem;   }
-    .task{
-      
-     
-        
-      }
+/* Hide the default checkbox */
+.task {
+    display: none;
+}
+
+/* Create a custom checkbox */
+.task + label {
+    position: relative;
+    padding-left: 30px;
+    cursor: pointer;
+    display: inline-block;
+    color: #000;
+    user-select: none;
+}
+
+.task + label:before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 20px;
+    height: 20px;
+    border: 1px solid #9b9b9b;
+    border-radius: 50%;
+    background-color: #fff;
+    box-sizing: border-box;
+    transition: background-color 0.3s, border-color 0.3s;
+}
+
+/* Style for the checked state */
+.task:checked + label:before {
+  background: linear-gradient(hsl(192, 100%, 67%), hsl(280, 87%, 65%));
+    
+    border-color: #000;
+}
+
+.checked + label:after {
+    content: "";
+    position: absolute;
+    left: 6px;
+    top: 50%;
+    /* transform: translateY(-50%); */
+    width: 8px;
+    height: 8px;
+    background-color:linear-gradient(hsl(192, 100%, 67%) ,hsl(280, 87%, 65%));
+
+}
+
 
     
   </style>
@@ -126,10 +170,10 @@
   <div id="todo-element">
     
     <div class="group">
-      <li class="list-group-item">
+      <!-- <li class="list-group-item">
         <input type="checkbox" id="item1" class="task">
         <label for="item1">Task 1</label>
-      </li>
+      </li> -->
 
     </div>  
      
@@ -183,5 +227,7 @@
     Coded by <a href="#">Your Name Here</a>.
   </div>
   <script src="script.js" ></script>
+<!-- Code injected by live-server -->
+
 </body>
 </html>
