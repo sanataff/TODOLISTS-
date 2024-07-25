@@ -148,8 +148,28 @@
     background-color:linear-gradient(hsl(192, 100%, 67%) ,hsl(280, 87%, 65%));
 
 }
+.Add-Task{
+  background-color:hsl(280, 87%, 65%) ;
+  color: black;
+}
+.Add-Task:hover{
+  background-color:hsl(280, 88%, 35%) ;
+  color: black;
+}
+@media only screen and (max-width: 375px) {
+  #todo-element{
+        width: 300px;
 
+    }
+    .input-group{
+      width:300px;
 
+    }
+    .buttons{
+      width: 300px;
+    }
+
+  }
     
   </style>
 </head>
@@ -163,7 +183,7 @@
   <div class="input-group mb-3">
     <input type="text" class="form-control" placeholder="creat a to do " aria-label="Recipient's username" aria-describedby="button-addon2">
     <div class="input-group-append">
-      <button class="btn btn-outline-secondary" type="button" id="button-addon2">Button</button>
+      <button class="btn btn-outline-secondary Add-Task" type="button" id="button-addon2">Add Task</button>
     </div>
   </div>
   
@@ -182,7 +202,7 @@
       <li class="list-group-item">Porta ac consectetur ac</li>
       <li class="list-group-item">Vestibulum at eros</li>-->
       <div class="buttons">
-        <button type="button" class="btn btn-primary btn-sm remaining">Small button</button>
+        <button type="button" class="btn btn-primary btn-sm remaining"></button>
       <div class="filter">
         <button type="button" class="btn btn-primary btn-sm all-filter">All</button>
         <button type="button" class="btn btn-primary btn-sm active-filter">Active</button>

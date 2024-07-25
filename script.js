@@ -9,7 +9,7 @@
 // clear completed function
 // filtiration (active,compleated,all)
 // dynamic text showing how many tasks left
-
+const input = $(".form-control")
 const body = $("body")
 const todoElement = $("#todo-element") 
 const group = $(".group")
@@ -20,6 +20,8 @@ const all = $(".all-filter")
 let itemNum = 0;
 let tasksArray = []
 const clearcompleted =$(".clear-completed")
+const remaining = $(".remaining")
+
 
 // from JSON to string
 getFromLocal()
@@ -29,13 +31,12 @@ if(localStorage.getItem("tasks")){
     let titles = tasksArray.map(task => task.title);
     let ids = tasksArray.map(task => task.id);
     let status = tasksArray.map(task => task.isCompleted)
-    // ids.forEach((id)=>{
-    //     title.forEach(())
-    // })
+
     if(localStorage.getItem("task number")){
-        itemNum = JSON.parse(localStorage.getItem("task number"))
+        // itemNum = JSON.parse(localStorage.getItem("task number"))
  
         loadingFromLocal(titles, status)
+        remaining.html(`${itemNum} items remaining`)
       
         // addTaskToJson()
     
@@ -96,7 +97,7 @@ function updateTaskCompletion(taskId, isCompleted) {
     if (task) {
         
         task.isCompleted = isCompleted;
-        addTaskToJson()
+        addTaskToJson() 
 
          // Save the updated array to local storage
     }
@@ -133,7 +134,9 @@ function loadingFromLocal(prevTask, state){
                 itemNum ++
                 // markAsCompleted()
                 removingFromUI()
+                markAsCompleted();
                 addTaskToJson()
+               
                 updateEventListeners()
                 // clearCompleted()
               
@@ -165,6 +168,8 @@ function addTask(){
     dynamiclist.append(input)
     dynamiclist.append(label)
     group.append(dynamiclist)
+    itemNum ++
+    remaining.html(`${itemNum} items remaining`)
     
     addTaskToArray(task)
     markAsCompleted();
@@ -186,6 +191,8 @@ function clearCompleted(){
         if (warapper[i].classList.contains("checked") ){
    
             toBeCleared.push(warapper[i])
+            itemNum --
+            remaining.html(`${itemNum} items remaining`)
            
 
             
@@ -213,6 +220,7 @@ function markAsCompleted(){
             // Add 'checked' class to the parent list item
             if (task.checked) {
                 warapper[index].classList.add("checked");
+                
                 warapper[index].setAttribute("id",ids[index])
                 console.log(warapper[index].id)
                 updateTaskCompletion(warapper[index].id,true)
@@ -223,33 +231,45 @@ function markAsCompleted(){
         });
     });
 }
+function removeCompletedTasks() {
+    // Filter tasks to exclude those with isCompleted set to true
+    tasksArray = tasksArray.filter(task => !task.isCompleted);
+    // Update local storage with the filtered array
+    addTaskToJson();
+}
+
+// Call the function to remove completed tasks
 
 
 
 const button = $(".btn-outline-secondary")
 button.on("click",function(){
     addTask()
-    itemNum ++
+    input.val("")
+    
+
 
 
 })
 markAsCompleted()
 function removingFromUI(){
     clearcompleted.on("click",function(){
+        const x = clearCompleted()
+
         // tasksArray.forEach((task),clearCompleted())
-        clearCompleted().forEach(function(taskcompleted){
+        x.forEach(function(taskcompleted){
             // updateTaskCompletion(taskcompleted.id,true)
             
             taskcompleted.remove()
     
-            itemNum --
+   
             
             addNumtoJson()
         })
+        removeCompletedTasks();
        
     
     })
 
 }
 updateEventListeners()
-
