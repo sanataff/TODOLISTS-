@@ -14,9 +14,7 @@ const body = $("body")
 const todoElement = $("#todo-element") 
 const group = $(".group")
 const checkedItems = $(".task:checked");
-const active = $(".active-filter")
-const completed = $(".completed-filter")
-const all = $(".all-filter")
+
 let itemNum = 0;
 let tasksArray = []
 const clearcompleted =$(".clear-completed")
@@ -27,22 +25,16 @@ const remaining = $(".remaining")
 getFromLocal()
 if(localStorage.getItem("tasks")){
     tasksArray = JSON.parse(localStorage.getItem("tasks"))
-    // markAsCompleted()
+
     let titles = tasksArray.map(task => task.title);
-    let ids = tasksArray.map(task => task.id);
+
     let status = tasksArray.map(task => task.isCompleted)
 
     if(localStorage.getItem("task number")){
-        // itemNum = JSON.parse(localStorage.getItem("task number"))
- 
+
         loadingFromLocal(titles, status)
         remaining.html(`${itemNum} items remaining`)
-      
-        // addTaskToJson()
-    
-        removingFromUI()
         addTaskToJson()
-        // markAsCompleted()
         updateEventListeners()
         
     }
@@ -132,17 +124,12 @@ function loadingFromLocal(prevTask, state){
                 dynamiclist.append(label)
                 group.append(dynamiclist)
                 itemNum ++
-                // markAsCompleted()
+
                 removingFromUI()
                 markAsCompleted();
                 addTaskToJson()
                
                 updateEventListeners()
-                // clearCompleted()
-              
-
-                
-
         }
     })
    
@@ -193,9 +180,6 @@ function clearCompleted(){
             toBeCleared.push(warapper[i])
             itemNum --
             remaining.html(`${itemNum} items remaining`)
-           
-
-            
         }
     }
     return toBeCleared
@@ -241,13 +225,10 @@ function removeCompletedTasks() {
 // Call the function to remove completed tasks
 
 
-
 const button = $(".btn-outline-secondary")
 button.on("click",function(){
     addTask()
     input.val("")
-    
-
 
 
 })
@@ -255,10 +236,8 @@ markAsCompleted()
 function removingFromUI(){
     clearcompleted.on("click",function(){
         const x = clearCompleted()
-
-        // tasksArray.forEach((task),clearCompleted())
         x.forEach(function(taskcompleted){
-            // updateTaskCompletion(taskcompleted.id,true)
+
             
             taskcompleted.remove()
     
@@ -272,4 +251,5 @@ function removingFromUI(){
     })
 
 }
+
 updateEventListeners()
