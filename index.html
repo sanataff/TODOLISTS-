@@ -157,26 +157,40 @@
   color: black;
 }
 @media only screen and (max-width: 450px) {
-
-  #todo-element{
+      #todo-element {
         width: 300px;
+      }
 
-    }
-    .input-group{
-      width:300px;
+      .input-group {
+        width: 300px;
+        left: 50%;
+        transform: translateX(-50%);
+      }
 
-    }
-    .buttons{
-      width: 300px;
-    }
-    #upper-header{
-      width: 400px;
-    }
-    #bottom-header{
-      width:400px;
-    }
+      .buttons {
+        width: 300px;
+        left: 50%;
+        transform: translateX(-50%);
+      }
 
-  }
+      #upper-header {
+        width: 100%;
+      }
+
+      #bottom-header {
+        width: 100%;
+      }
+
+      img {
+        max-width: 100%;
+      }
+
+      h1 {
+        bottom: 50%;
+        right: 50%;
+        transform: translate(50%, 50%);
+      }
+    }
     
   </style>
 </head>
